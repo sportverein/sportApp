@@ -7,9 +7,9 @@ import com.example.teilnehmer.sportapp.protocol.SignoffRequest;
  */
 
 public class SignoffTask extends BaseHttpRequestTask {
-    private final String station;
+    private final int station;
 
-    public SignoffTask(String station) {
+    public SignoffTask(int station) {
         this.station = station;
     }
 
