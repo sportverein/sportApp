@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
+
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ExpandableListView view_schoolclasses;
+    private Spinner view_schoolclasses;
     private ArrayList<String> schoolclasses;
 
     private TextView tvStation;
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        view_schoolclasses = (ExpandableListView) findViewById(R.id.schoolclasses);
+        view_schoolclasses = (Spinner) findViewById(R.id.schoolclasses);
     }
 
     public void RefreshSchoolclasses(){
