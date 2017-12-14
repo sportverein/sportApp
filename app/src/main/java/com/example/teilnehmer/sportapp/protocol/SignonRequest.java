@@ -4,11 +4,11 @@ package com.example.teilnehmer.sportapp.protocol;
  * Created by Teilnehmer on 13.12.2017.
  */
 
-public class LoginRequest {
+public class SignonRequest {
     private String host;
     private int station;
 
-    public LoginRequest(String host, int station) {
+    public SignonRequest(String host, int station) {
         this.host = host;
         this.station = station;
     }

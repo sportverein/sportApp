@@ -13,4 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="btn_send">Senden</string>
+    <string name="btn_signoff">Abmelden</string>
+    <string name="tv_points">Punkte</string>
 </resources>

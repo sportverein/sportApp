@@ -31,7 +31,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.teilnehmer.sportapp.protocol.LoginRequest;
+import com.example.teilnehmer.sportapp.protocol.Command;
+import com.example.teilnehmer.sportapp.protocol.SignonRequest;
+import com.example.teilnehmer.sportapp.protocol.SignonResponse;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -186,8 +188,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(host, station);
-            mAuthTask.execute((Void) null);
+            mAuthTask = new UserLoginTask(host, station, this);
+            mAuthTask.execute();
         }
     }
 
@@ -295,62 +297,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends BaseHttpRequestTask {
 
         private final String mHost;
         private final String mStation;
+        private final LoginActivity loginActivity;
 
-        UserLoginTask(String host, String station) {
+        UserLoginTask(String host, String station, LoginActivity activity) {
             mHost = host;
             mStation = station;
+            loginActivity = activity;
         }
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
+        protected void execute() {
             // TODO: attempt authentication against a network service.
-            LoginRequest lr = new LoginRequest(mHost, Integer.parseInt(mStation));
-            Gson gson = new Gson();
-            String json = gson.toJson(lr);
-            Log.e("json", json);
+            SignonRequest lr = new SignonRequest(mHost, Integer.parseInt(mStation));
+            String json = serialize(lr);
 
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mHost)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mStation);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
+            super.execute(mHost, Command.signon, json);
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
+        protected void onPostExecute(String json) {
 
-            if (success) {
-                finish();
-            } else {
-                mStationView.setError(getString(R.string.error_incorrect_password));
-                mStationView.requestFocus();
-            }
+            SignonResponse signonResponse = (SignonResponse)deserialize(json, SignonResponse.class);
+
+            Toast.makeText(loginActivity, "Login erfolgreich!", Toast.LENGTH_LONG).show();
+
         }
 
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
     }
 }
 
