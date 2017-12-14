@@ -159,8 +159,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mStationView.setError(null);
 
         // Store values at the time of the login attempt.
-        String host = mHostView.getText().toString();
-        String station = mStationView.getText().toString();
+        host = mHostView.getText().toString();
+        station = mStationView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -285,7 +285,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void showMainActivity() {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        intent.putExtra(this.STATION, Integer.valueOf(station));
+        intent.putExtra(this.STATION, station);
         startActivity(intent);
     }
 }
