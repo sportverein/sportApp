@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         String actItem = view_schoolclasses.getSelectedItem().toString();
         String actPoints = etPoints.getText().toString();
         if(actPoints.length()>0){
+            etPoints.setText("");
             SenddataTask senddataTask = new SenddataTask(Integer.parseInt(station), actItem, Integer.parseInt(actPoints),host,this);
             senddataTask.execute();
         }
