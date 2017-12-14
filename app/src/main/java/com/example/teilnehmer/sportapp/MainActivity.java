@@ -23,6 +23,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void RefreshSchoolclasses(){
-        view_schoolclasses.ad
+
     }
 }
