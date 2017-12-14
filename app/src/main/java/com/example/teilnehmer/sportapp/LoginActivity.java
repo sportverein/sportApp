@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
+    public final static String STATION = "Station";
+
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -63,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mStationView;
     private View mProgressView;
     private View mLoginFormView;
+    private String host;
+    private String station;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,19 +187,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+
             mAuthTask = new UserLoginTask(host, station, this);
             mAuthTask.execute();
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 
     /**
@@ -290,6 +285,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void showMainActivity() {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.putExtra(this.STATION, Integer.valueOf(station));
         startActivity(intent);
     }
 }
