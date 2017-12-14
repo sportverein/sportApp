@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickSenddata(View view) {
         String actItem = view_schoolclasses.getSelectedItem().toString();
-        Toast.makeText(this, actItem, Toast.LENGTH_LONG).show();
         String actPoints = etPoints.getText().toString();
         if(actPoints.length()>0){
             SenddataTask senddataTask = new SenddataTask(Integer.parseInt(station), actItem, Integer.parseInt(actPoints),host,this);
