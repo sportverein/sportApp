@@ -1,4 +1,4 @@
-package com.example.teilnehmer.sportapp.protocol;
+package com.example.teilnehmer.sportapp.task;
 
 /**
  * Created by Teilnehmer on 14.12.2017.
@@ -6,8 +6,10 @@ package com.example.teilnehmer.sportapp.protocol;
 
 import android.widget.Toast;
 
-import com.example.teilnehmer.sportapp.BaseHttpRequestTask;
 import com.example.teilnehmer.sportapp.LoginActivity;
+import com.example.teilnehmer.sportapp.protocol.Command;
+import com.example.teilnehmer.sportapp.protocol.SignonRequest;
+import com.example.teilnehmer.sportapp.protocol.SignonResponse;
 
 /**
  * Represents an asynchronous login/registration task used to authenticate
@@ -25,7 +27,7 @@ public class UserLoginTask extends BaseHttpRequestTask {
         loginActivity = activity;
     }
 
-    protected void execute() {
+    public void execute() {
         // TODO: attempt authentication against a network service.
         SignonRequest lr = new SignonRequest(mHost, Integer.parseInt(mStation));
         String json = serialize(lr);
