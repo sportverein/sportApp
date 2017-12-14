@@ -5,13 +5,13 @@ package com.example.teilnehmer.sportapp.protocol;
  */
 
 public class SignoffRequest {
-    private int station;
+    private String station;
 
-    public SignoffRequest(int station) {
+    public SignoffRequest(String station) {
         this.station = station;
     }
 
-    public int getStation() {
+    public String getStation() {
         return station;
     }
 }
