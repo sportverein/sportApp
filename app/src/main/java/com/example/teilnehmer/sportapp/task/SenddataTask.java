@@ -39,7 +39,8 @@ public class SenddataTask extends BaseHttpRequestTask{
         SenddataResponse senddataResponse = (SenddataResponse) deserialize(json, SenddataResponse.class);
         if(senddataResponse.isSuccess()) {
             Toast.makeText(mainActivity, "Punkte erfolgreich eingetragen", Toast.LENGTH_LONG).show();
-            //mainActivity.RefreshSchoolclasses();
+            GrouplistTask grouplistTask = new GrouplistTask(station,mainActivity, host);
+            grouplistTask.execute();
         } else {
             Toast.makeText(mainActivity, "eintragen fehlgeschlagen!", Toast.LENGTH_LONG).show();
         }
