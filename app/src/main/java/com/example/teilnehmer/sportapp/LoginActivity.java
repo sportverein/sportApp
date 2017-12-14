@@ -3,6 +3,7 @@ package com.example.teilnehmer.sportapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import com.example.teilnehmer.sportapp.protocol.Command;
 import com.example.teilnehmer.sportapp.protocol.SignonRequest;
 import com.example.teilnehmer.sportapp.protocol.SignonResponse;
+import com.example.teilnehmer.sportapp.protocol.UserLoginTask;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -293,39 +295,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends BaseHttpRequestTask {
-
-        private final String mHost;
-        private final String mStation;
-        private final LoginActivity loginActivity;
-
-        UserLoginTask(String host, String station, LoginActivity activity) {
-            mHost = host;
-            mStation = station;
-            loginActivity = activity;
-        }
-
-        protected void execute() {
-            // TODO: attempt authentication against a network service.
-            SignonRequest lr = new SignonRequest(mHost, Integer.parseInt(mStation));
-            String json = serialize(lr);
-
-            super.execute(mHost, Command.signon, json);
-        }
-
-        @Override
-        protected void onPostExecute(String json) {
-
-            SignonResponse signonResponse = (SignonResponse)deserialize(json, SignonResponse.class);
-
-            Toast.makeText(loginActivity, "Login erfolgreich!", Toast.LENGTH_LONG).show();
-
-        }
-
+    public void showMainActivity() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
     }
 }
 
