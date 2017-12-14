@@ -22,7 +22,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        station = getIntent().getExtras().getString(LoginActivity.STATION);
+
+
+        tvStation = (TextView) findViewById(R.id.tv_station);
         view_schoolclasses = (Spinner) findViewById(R.id.s_schoolclasses);
+
+        tvStation.setText(getString(R.string.tv_station)+" "+station);
     }
 
     public void RefreshSchoolclasses(){
