@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner view_schoolclasses;
     private ArrayList<String> schoolclasses;
     private Button btnSignoff;
+    private ProgressBar pbProgress;
 
     private TextView tvStation;
     private String station;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         view_schoolclasses = (Spinner) findViewById(R.id.s_schoolclasses);
         btnSignoff = (Button) findViewById(R.id.btn_signoff);
         etPoints = (EditText) findViewById(R.id.et_punkte);
+        pbProgress = (ProgressBar) findViewById(R.id.pb_progress);
 
         tvStation.setText(getString(R.string.tv_station)+" "+station);
 
@@ -58,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
 
+    }
+
+    public void setProgressbar(int progress) {
+        pbProgress.setProgress(progress);
     }
 
     public void signoff() {

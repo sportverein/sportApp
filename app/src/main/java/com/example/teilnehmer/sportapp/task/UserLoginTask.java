@@ -39,7 +39,6 @@ public class UserLoginTask extends BaseHttpRequestTask {
     protected void onPostExecute(String json) {
         SignonResponse signonResponse = (SignonResponse)deserialize(json, SignonResponse.class);
         if(signonResponse.isSuccess()) {
-            Toast.makeText(loginActivity, "Login erfolgreich!", Toast.LENGTH_LONG).show();
             loginActivity.showMainActivity();
         } else {
             Toast.makeText(loginActivity, "Login fehlgeschlagen!", Toast.LENGTH_LONG).show();
