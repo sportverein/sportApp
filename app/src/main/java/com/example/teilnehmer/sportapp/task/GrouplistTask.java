@@ -13,12 +13,12 @@ import com.example.teilnehmer.sportapp.protocol.SignonResponse;
  * Created by F. Jetzinger on 14.12.2017.
  */
 
-public class GroupTask extends BaseHttpRequestTask {
+public class GrouplistTask extends BaseHttpRequestTask {
     private int station;
     private MainActivity mainActivity;
     private String host;
 
-    public GroupTask(int station, MainActivity mainActivity, String host) {
+    public GrouplistTask(int station, MainActivity mainActivity, String host) {
         this.station = station;
         this.mainActivity = mainActivity;
         this.host = host;

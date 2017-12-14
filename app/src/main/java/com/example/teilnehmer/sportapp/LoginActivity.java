@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public final static String STATION = "Station";
 
+    public final static String HOST = "host";
+
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -286,6 +288,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void showMainActivity() {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         intent.putExtra(this.STATION, station);
+        intent.putExtra(this.HOST, host);
         startActivity(intent);
     }
 }
