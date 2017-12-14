@@ -39,6 +39,8 @@ public class GrouplistTask extends BaseHttpRequestTask {
 
         if (grouplistResponse.isSuccess()) {
             Toast.makeText(mainActivity, "Klassen erfogreich übertragen", Toast.LENGTH_LONG).show();
+
+            mainActivity.setSchoolclasses(grouplistResponse.getSchoolclasses());
             mainActivity.RefreshSchoolclasses();
         } else {
             Toast.makeText(mainActivity, "Klassenübertragung fehlgeschlagen!", Toast.LENGTH_LONG).show();

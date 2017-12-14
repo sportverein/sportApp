@@ -40,14 +40,19 @@ public class MainActivity extends AppCompatActivity {
     public void RefreshSchoolclasses(){
         GrouplistTask grouplistTask = new GrouplistTask(Integer.parseInt(station),this, host);
         grouplistTask.execute();
-
+        
+        
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, schoolclasses);
         view_schoolclasses.setAdapter(adapter);
         for(String s: schoolclasses){
             adapter.add(s);
-            adapter.notifyDataSetChanged();
         }
+        adapter.notifyDataSetChanged();
 
+    }
+
+    public void setSchoolclasses(ArrayList<String> schoolclasses) {
+        this.schoolclasses = schoolclasses;
     }
 }
