@@ -54,12 +54,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setSchoolclasses(ArrayList<String> schoolclasses) {
-        this.schoolclasses = schoolclasses;
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, schoolclasses);
-        view_schoolclasses.setAdapter(adapter);
+        if(schoolclasses.isEmpty()){
+            Button send = (Button) findViewById(R.id.btn_send);
+            send.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "Alle Stationen eingetragen", Toast.LENGTH_LONG).show();
 
-        adapter.notifyDataSetChanged();
+        }else {
+            this.schoolclasses = schoolclasses;
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_dropdown_item, schoolclasses);
+            view_schoolclasses.setAdapter(adapter);
+
+            adapter.notifyDataSetChanged();
+        }
 
     }
 
