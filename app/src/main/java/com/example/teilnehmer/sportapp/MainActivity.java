@@ -28,16 +28,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvStation;
     private String station;
     private EditText etPoints;
+    private Button btnSend;
 
     private String host;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnSend = (Button) findViewById(R.id.btn_send);
+        btnSend.setActivated(false);
 
         station = getIntent().getExtras().getString(LoginActivity.STATION);
         host = getIntent().getExtras().getString(LoginActivity.HOST);
+
+
 
         tvStation = (TextView) findViewById(R.id.tv_station);
         view_schoolclasses = (Spinner) findViewById(R.id.s_schoolclasses);
@@ -54,19 +60,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setSchoolclasses(ArrayList<String> schoolclasses) {
+        this.schoolclasses = schoolclasses;
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, schoolclasses);
+        view_schoolclasses.setAdapter(adapter);
         if(schoolclasses.isEmpty()){
-            Button send = (Button) findViewById(R.id.btn_send);
-            send.setVisibility(View.INVISIBLE);
+            btnSend.setVisibility(View.INVISIBLE);
+            btnSend.setActivated(false);
             Toast.makeText(this, "Alle Stationen eingetragen", Toast.LENGTH_LONG).show();
-
         }else {
-            this.schoolclasses = schoolclasses;
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_spinner_dropdown_item, schoolclasses);
-            view_schoolclasses.setAdapter(adapter);
 
-            adapter.notifyDataSetChanged();
+            btnSend.setActivated(true);
+
         }
+        adapter.notifyDataSetChanged();
 
     }
 
