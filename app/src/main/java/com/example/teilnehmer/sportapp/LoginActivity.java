@@ -3,8 +3,11 @@ package com.example.teilnehmer.sportapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +31,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.teilnehmer.sportapp.task.UserLoginTask;
 
@@ -37,7 +41,9 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via ip/station.
+ *
+ * Tobias Krüger krueger@kmint.de
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -74,6 +80,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (!isNetworkAvailable()) {
+            Toast.makeText(this, "Keine Netzwerkverbindung möglich", Toast.LENGTH_LONG).show();
+        }
+
         // Set up the login form.
         mHostView = (AutoCompleteTextView) findViewById(R.id.host);
         populateAutoComplete();
@@ -291,6 +302,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         intent.putExtra(this.HOST, host);
         this.finish();
         startActivity(intent);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
 
