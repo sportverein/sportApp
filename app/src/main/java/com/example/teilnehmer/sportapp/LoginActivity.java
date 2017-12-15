@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,8 +34,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.teilnehmer.sportapp.task.UrlTask;
 import com.example.teilnehmer.sportapp.task.UserLoginTask;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,6 +195,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Check for a valid host address.
         if (TextUtils.isEmpty(host)) {
             mHostView.setError(getString(R.string.error_field_required));
+            focusView = mHostView;
+            cancel = true;
+        }
+
+        UrlTask urlTask = new UrlTask();
+        urlTask.execute(host);
+        if (!urlTask.isValid()) {
+            mHostView.setError(getString(R.string.error_invalid_url));
             focusView = mHostView;
             cancel = true;
         }
