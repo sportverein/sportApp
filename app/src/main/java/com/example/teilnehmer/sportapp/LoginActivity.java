@@ -47,7 +47,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via ip/station.
- *
+ * <p>
  * Tobias Krüger krueger@kmint.de
  * Franz Jetzinger kontakt@schule-jetzinger.de
  */
@@ -61,6 +61,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public final static String STATION = "Station";
 
     public final static String HOST = "host";
+
+    private boolean validUrl;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -86,6 +88,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //kommt noch
+        validUrl = true;
 
         if (!isNetworkAvailable()) {
             Toast.makeText(this, "Keine Netzwerkverbindung möglich", Toast.LENGTH_LONG).show();
@@ -199,9 +204,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
-        UrlTask urlTask = new UrlTask();
+        UrlTask urlTask = new UrlTask(this);
         urlTask.execute(host);
-        if (!urlTask.isValid()) {
+
+        if (!validUrl) {
             mHostView.setError(getString(R.string.error_invalid_url));
             focusView = mHostView;
             cancel = true;
@@ -298,6 +304,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mHostView.setAdapter(adapter);
+    }
+
+    public void setUrlValid(Boolean urlValid) {
+        this.validUrl = urlValid;
     }
 
 

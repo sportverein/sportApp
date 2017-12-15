@@ -2,6 +2,8 @@ package com.example.teilnehmer.sportapp.task;
 
 import android.os.AsyncTask;
 
+import com.example.teilnehmer.sportapp.LoginActivity;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,9 +15,10 @@ import java.net.URLConnection;
 
 public class UrlTask extends AsyncTask<String, String, Boolean>  {
     private boolean valid;
+    private LoginActivity loginActivity;
 
-    public UrlTask() {
-
+    public UrlTask(LoginActivity loginActivity) {
+        this.loginActivity = loginActivity;
     }
 
     @Override
@@ -34,10 +37,10 @@ public class UrlTask extends AsyncTask<String, String, Boolean>  {
 
     @Override
     protected void onPostExecute(Boolean s) {
+        loginActivity.setUrlValid(s.booleanValue());
 
+        //mAuthTask = new UserLoginTask(host, station, this);
+        //mAuthTask.execute();
     }
 
-    public boolean isValid() {
-        return valid;
-    }
 }
