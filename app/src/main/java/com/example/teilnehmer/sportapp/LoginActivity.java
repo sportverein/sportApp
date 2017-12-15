@@ -44,6 +44,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via ip/station.
  *
  * Tobias Krüger krueger@kmint.de
+ * Franz Jetzinger kontakt@schule-jetzinger.de
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
