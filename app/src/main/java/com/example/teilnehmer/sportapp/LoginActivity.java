@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         if (!isNetworkAvailable()) {
             Toast.makeText(this, "Keine Netzwerkverbindung möglich", Toast.LENGTH_LONG).show();
+            this.finish();
         }
 
         // Set up the login form.

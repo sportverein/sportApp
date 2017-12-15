@@ -11,6 +11,8 @@ import com.example.teilnehmer.sportapp.protocol.Command;
 import com.example.teilnehmer.sportapp.protocol.SignonRequest;
 import com.example.teilnehmer.sportapp.protocol.SignonResponse;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Represents an asynchronous login/registration task used to authenticate
  * the user.
@@ -31,6 +33,20 @@ public class UserLoginTask extends BaseHttpRequestTask {
         // TODO: attempt authentication against a network service.
         SignonRequest lr = new SignonRequest(mHost, Integer.parseInt(mStation));
         String json = serialize(lr);
+
+        new Thread(new Runnable() {
+            public void run(){
+                try {
+                    sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (!loginActivity.isFinishing()) {
+                    loginActivity.finish();
+                    loginActivity.startActivity(loginActivity.getIntent());
+                }
+            }
+        }).start();
 
         super.execute(mHost, Command.signon, json);
     }
