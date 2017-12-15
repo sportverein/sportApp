@@ -69,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
             btnSend.setActivated(false);
             Toast.makeText(this, "Alle Stationen eingetragen", Toast.LENGTH_LONG).show();
         }else {
-
             btnSend.setActivated(true);
-
         }
         adapter.notifyDataSetChanged();
 
